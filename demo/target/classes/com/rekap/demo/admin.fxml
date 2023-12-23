@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.rekap.demo.Admin">
+   <children>
+      <AnchorPane layoutX="12.0" layoutY="11.0" prefHeight="572.0" prefWidth="771.0" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="11.0">
+         <children>
+            <Text layoutX="45.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+            <Text layoutX="34.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NIS" wrappingWidth="22.544937133789062" AnchorPane.leftAnchor="34.0" AnchorPane.rightAnchor="714.4550628662109" />
+            <Text layoutX="34.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nama" wrappingWidth="35.21159362792969" AnchorPane.leftAnchor="34.0" AnchorPane.rightAnchor="701.7884063720703" />
+            <Text layoutX="34.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bahasa Indonesia" wrappingWidth="95.87826538085938" AnchorPane.leftAnchor="34.0" AnchorPane.rightAnchor="642.1217346191406" />
+            <Text layoutX="34.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bahasa Inggris" wrappingWidth="81.87826538085938" AnchorPane.leftAnchor="34.0" AnchorPane.rightAnchor="656.1217346191406" />
+            <Text layoutX="34.0" layoutY="174.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ilmu Pengetahuan Alam" wrappingWidth="129.8782501220703" AnchorPane.leftAnchor="34.0" AnchorPane.rightAnchor="656.1217346191406" />
+            <Text layoutX="34.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Matematika" wrappingWidth="68.544921875" AnchorPane.leftAnchor="34.0" AnchorPane.rightAnchor="704.1217346191406" />
+            <TextField fx:id="field_IPA" layoutX="194.0" layoutY="154.0" prefHeight="25.0" prefWidth="263.0" promptText="Ilmu Pengetahuan Alam" AnchorPane.leftAnchor="194.0" AnchorPane.rightAnchor="363.0" />
+            <TextField fx:id="field_Inggris" layoutX="194.0" layoutY="124.0" prefHeight="25.0" prefWidth="263.0" promptText="Bahasa Inggris" AnchorPane.leftAnchor="194.0" AnchorPane.rightAnchor="363.0" />
+            <TextField fx:id="field_MTK" layoutX="194.0" layoutY="184.0" prefHeight="25.0" prefWidth="263.0" promptText="Matematika" AnchorPane.leftAnchor="194.0" AnchorPane.rightAnchor="363.0" />
+            <TextField fx:id="field_Indonesia" layoutX="194.0" layoutY="94.0" prefHeight="25.0" prefWidth="263.0" promptText="Bahasa Indonesia" AnchorPane.leftAnchor="194.0" AnchorPane.rightAnchor="363.0" />
+            <TextField fx:id="field_Nama" layoutX="194.0" layoutY="64.0" prefHeight="25.0" prefWidth="263.0" promptText="Nama Siswa" AnchorPane.leftAnchor="194.0" AnchorPane.rightAnchor="363.0" />
+            <TextField fx:id="field_NIS" layoutX="194.0" layoutY="34.0" prefHeight="25.0" prefWidth="263.0" promptText="Nomor Induk Siswa" AnchorPane.leftAnchor="193.8782501220703" AnchorPane.rightAnchor="363.0" />
+            <Button layoutX="385.0" layoutY="233.0" mnemonicParsing="false" onAction="#input" prefHeight="30.0" prefWidth="72.0" text="Input" AnchorPane.rightAnchor="362.8782501220703">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Button layoutX="153.0" layoutY="233.0" mnemonicParsing="false" onAction="#edit" prefHeight="30.0" prefWidth="72.0" text="Edit" AnchorPane.rightAnchor="594.8782501220703">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Button layoutX="276.0" layoutY="233.0" mnemonicParsing="false" onAction="#delete" prefHeight="30.0" prefWidth="72.0" text="Delete" AnchorPane.rightAnchor="471.8782501220703">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Button layoutX="34.0" layoutY="233.0" mnemonicParsing="false" onAction="#clear" prefHeight="30.0" prefWidth="72.0" text="Clear" AnchorPane.rightAnchor="713.8782501220703">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <TableView fx:id="tableView" layoutX="16.0" layoutY="286.0" prefHeight="270.0" prefWidth="785.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="19.0">
+               <columns>
+                  <TableColumn fx:id="NIS" editable="false" prefWidth="55.0" text="NIS" />
+                  <TableColumn fx:id="Nama" editable="false" prefWidth="97.0" text="Nama" />
+                  <TableColumn fx:id="Indonesia" editable="false" prefWidth="135.0" text="Indonesia" />
+                  <TableColumn fx:id="Bahasa_Inggris" editable="false" prefWidth="117.0" text="Inggris" />
+                  <TableColumn fx:id="Ilmu_Pengetahuan_Alam" editable="false" minWidth="0.0" prefWidth="144.0" text="IPA" />
+                  <TableColumn fx:id="Matematika" editable="false" prefWidth="152.0" text="Matematika" />
+                  <TableColumn fx:id="dateContent" prefWidth="75.0" text="Date" />
+               </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+
+            <Button layoutX="497.0" layoutY="233.0" mnemonicParsing="false" onAction="#refresh" prefHeight="30.0" prefWidth="82.0" text="Refresh" AnchorPane.rightAnchor="240.8782501220703" />
+            <Button layoutX="614.0" layoutY="233.0" mnemonicParsing="false" onAction="#logout" prefHeight="30.0" prefWidth="82.0" text="Logout" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
