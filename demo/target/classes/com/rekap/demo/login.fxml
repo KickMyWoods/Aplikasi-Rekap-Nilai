@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.rekap.demo.Login">
+   <children>
+      <AnchorPane layoutX="18.0" layoutY="13.0" prefHeight="571.0" prefWidth="764.0" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="18.0" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="13.0">
+         <children>
+            <Text layoutX="100.0" layoutY="189.77587890625" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" wrappingWidth="136.8033905029297" AnchorPane.bottomAnchor="375.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="527.1966094970703" AnchorPane.topAnchor="162.0">
+               <font>
+                  <Font name="Berlin Sans FB" size="31.0" />
+               </font>
+            </Text>
+            <Text layoutX="100.0" layoutY="255.77587890625" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" wrappingWidth="136.8033905029297" AnchorPane.bottomAnchor="309.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="527.1966094970703" AnchorPane.topAnchor="228.0">
+               <font>
+                  <Font name="Berlin Sans FB" size="31.0" />
+               </font>
+            </Text>
+            <Button layoutX="557.0" layoutY="346.0" mnemonicParsing="false" onAction="#login" prefHeight="41.0" prefWidth="84.0" style="-fx-background-color: #f75e05;" text="Login" AnchorPane.rightAnchor="123.0">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <TextField fx:id="username" layoutX="309.0" layoutY="163.0" prefHeight="36.0" prefWidth="337.0" promptText="Username" AnchorPane.leftAnchor="309.0" AnchorPane.rightAnchor="118.0" />
+            <PasswordField fx:id="password" layoutX="309.0" layoutY="229.0" prefHeight="36.0" prefWidth="337.0" promptText="Password" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
