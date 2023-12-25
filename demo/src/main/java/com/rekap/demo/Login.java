@@ -16,26 +16,9 @@ import java.sql.*;
 public class Login {
 
     @FXML
-    private CheckBox ShowPassword;
-    @FXML
     private PasswordField password;
     @FXML
     private TextField username;
-
-    @FXML
-    void initialize() {
-        // Mengatur listener untuk mengubah echoChar pada perubahan status CheckBox
-        ShowPassword.selectedProperty().addListener((observable, oldValue, newValue) -> {
-            // Menampilkan atau menyembunyikan password berdasarkan status CheckBox
-            if (newValue) {
-                password.setPromptText(null);  // Menghapus prompt text
-                password.setText(password.getText());  // Menetapkan teks untuk memicu tampilan
-            } else {
-                password.setPromptText("Password");  // Menetapkan prompt text untuk masking
-                password.setText(password.getText());  // Menetapkan teks untuk memicu tampilan
-            }
-        });
-    }
 
     @FXML
     void login(ActionEvent event) {

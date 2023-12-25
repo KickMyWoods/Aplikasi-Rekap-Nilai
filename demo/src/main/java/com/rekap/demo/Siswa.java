@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
@@ -72,5 +73,10 @@ public class Siswa {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Sukses !!!");
+        alert.setHeaderText(null);
+        alert.setContentText("Anda telah logout");
+        alert.showAndWait();
     }
 }

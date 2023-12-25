@@ -280,5 +280,11 @@ public class Admin {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        // Menampilkan informasi apabila berhasil logout
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Sukses !!!");
+        alert.setHeaderText(null);
+        alert.setContentText("Anda telah logout");
+        alert.showAndWait();
     }
 }
