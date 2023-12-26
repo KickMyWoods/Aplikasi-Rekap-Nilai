@@ -8,6 +8,7 @@ import java.io.IOException;
 
 public class RekapNilaiApp extends Application {
     @Override
+    //Menampilkan halaman log in
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(RekapNilaiApp.class.getResource("login.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 800, 500);

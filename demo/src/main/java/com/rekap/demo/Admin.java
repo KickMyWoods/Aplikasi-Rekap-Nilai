@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.sql.*;
 
 public class Admin {
+    // Tipe data 
     @FXML
     private TextField field_Indonesia;
     @FXML
@@ -50,6 +51,7 @@ public class Admin {
 
     @FXML
     void clear(ActionEvent event) {
+        // Mengosongkan input
         field_NIS.clear();
         field_Nama.clear();
         field_Indonesia.clear();
@@ -132,7 +134,8 @@ public class Admin {
         }
     }
 
-    
+
+
     @FXML
     void input(ActionEvent event) {
         // Memeriksa apakah data yang dimasukkan sudah ada dalam tabel (berdasarkan NIS)
@@ -280,11 +283,5 @@ public class Admin {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        // Menampilkan informasi apabila berhasil logout
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Sukses !!!");
-        alert.setHeaderText(null);
-        alert.setContentText("Anda telah logout");
-        alert.showAndWait();
     }
 }
