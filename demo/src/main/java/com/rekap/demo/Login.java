@@ -6,7 +6,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -14,11 +13,11 @@ import java.io.IOException;
 import java.sql.*;
 
 public class Login {
-
     @FXML
     private PasswordField password;
     @FXML
     private TextField username;
+    private boolean loginErrorShown = false;
 
     @FXML
     void login(ActionEvent event) {
@@ -39,15 +38,13 @@ public class Login {
     }
 
     private boolean isLoginValidForAdmin(String username, String password) {
-        // Admin statis, gantilah dengan informasi login admin yang sesuai
         return username.equals("admin") && password.equals("admin123");
     }
 
     private boolean isLoginValidForSiswa(String username, String password) {
-        // Implementasi sederhana untuk koneksi ke database
-        String url = "jdbc:mysql://localhost:3306/rekapnilai"; // Ganti dengan URL database Anda
-        String user = "root"; // Ganti dengan username database Anda
-        String pass = ""; // Ganti dengan password database Anda
+        String url = "jdbc:mysql://localhost:3306/rekapnilai";
+        String user = "root";
+        String pass = "";
 
         try (Connection connection = DriverManager.getConnection(url, user, pass)) {
             // Query untuk memeriksa keberadaan data siswa di tabel akun
@@ -61,12 +58,13 @@ public class Login {
                         // Data siswa ditemukan, login sukses
                         return true;
                     } else {
-                        // Data siswa tidak ditemukan, tampilkan pop-up data tidak ditemukan
+                        // Data siswa tidak ditemukan, tampilkan alert
                         showLoginErrorAlert();
                         return false;
                     }
                 }
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
@@ -112,19 +110,13 @@ public class Login {
         }
     }
 
-
-
-
-
-    // Metode untuk menampilkan pop-up kesalahan login
-    private boolean loginErrorShown = false;
-
+    // Method untuk menampilkan pop-up kesalahan login
     private void showLoginErrorAlert() {
         if (!loginErrorShown) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Login Failed");
+            alert.setTitle("Login Gagal");
             alert.setHeaderText(null);
-            alert.setContentText("Username atau Password Salah. Silakan Login kembali");
+            alert.setContentText("Username atau Password Salah! Silakan Login kembali!");
             alert.showAndWait();
 
             loginErrorShown = true;
