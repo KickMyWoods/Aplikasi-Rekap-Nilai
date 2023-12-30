@@ -8,14 +8,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.sql.*;
+import java.util.Optional;
 
 public class Admin {
     @FXML
@@ -31,20 +28,6 @@ public class Admin {
     @FXML
     private TextField field_NIS;
     @FXML
-    private TableColumn<?, ?> dateContent;
-    @FXML
-    private TableColumn<?, ?> NIS;
-    @FXML
-    private TableColumn<?, ?> Nama;
-    @FXML
-    private TableColumn<?, ?> Bahasa_Indonesia;
-    @FXML
-    private TableColumn<?, ?> Bahasa_Inggris;
-    @FXML
-    private TableColumn<?, ?> Ilmu_Pengetahuan_Alam;
-    @FXML
-    private TableColumn<?, ?> Matematika;
-    @FXML
     private TableView<ObservableList<String>> tableView;
 
 
@@ -56,51 +39,6 @@ public class Admin {
         field_Inggris.clear();
         field_IPA.clear();
         field_MTK.clear();
-    }
-
-    @FXML
-    void delete(ActionEvent event) {
-        try {
-            // Mendapatkan data yang dipilih dari tabel
-            ObservableList<ObservableList<String>> selectedData = tableView.getSelectionModel().getSelectedItems();
-
-            if (!selectedData.isEmpty()) {
-                // Mendapatkan nilai NIS dari data yang dipilih (karena NIS adalah primary key)
-                String selectedNIS = selectedData.get(0).get(0);
-
-                try (Connection connection = DatabaseConnection.getConnection();
-                     PreparedStatement statement = connection.prepareStatement("DELETE FROM siswa WHERE NIS = ?")) {
-                    // Setel nilai parameter NIS
-                    statement.setString(1, selectedNIS);
-
-                    // Jalankan pernyataan
-                    int rowsAffected = statement.executeUpdate();
-
-                    if (rowsAffected > 0) {
-                        // Menampilkan Alert jika penghapusan berhasil
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("Sukses");
-                        alert.setHeaderText(null);
-                        alert.setContentText("Data berhasil dihapus!");
-                        alert.showAndWait();
-
-                        // Refresh tabel setelah penghapusan
-                        refreshTable();
-                    }
-                }
-
-            } else {
-                // Menampilkan Alert jika tidak ada data yang dipilih
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setTitle("Peringatan");
-                alert.setHeaderText(null);
-                alert.setContentText("Pilih data yang ingin dihapus!");
-                alert.showAndWait();
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 
 
@@ -132,7 +70,62 @@ public class Admin {
         }
     }
 
-    
+
+    @FXML
+    void delete(ActionEvent event) {
+        try {
+            // Mendapatkan data yang dipilih dari tabel
+            ObservableList<ObservableList<String>> selectedData = tableView.getSelectionModel().getSelectedItems();
+
+            if (!selectedData.isEmpty()) {
+                // Mendapatkan nilai NIS dari data yang dipilih (karena NIS adalah primary key)
+                String selectedNIS = selectedData.get(0).get(0);
+
+                // Menampilkan konfirmasi dialog sebelum menghapus data
+                Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
+                confirmAlert.setTitle("Konfirmasi");
+                confirmAlert.setHeaderText(null);
+                confirmAlert.setContentText("Apakah anda yakin ingin menghapus data?");
+                Optional<ButtonType> result = confirmAlert.showAndWait();
+
+                if (result.isPresent() && result.get() == ButtonType.OK) {
+                    try (Connection connection = DatabaseConnection.getConnection();
+                         PreparedStatement statement = connection.prepareStatement("DELETE FROM siswa WHERE NIS = ?")) {
+                        // Setel nilai parameter NIS
+                        statement.setString(1, selectedNIS);
+
+                        // Jalankan pernyataan
+                        int rowsAffected = statement.executeUpdate();
+
+                        if (rowsAffected > 0) {
+                            // Menampilkan Alert jika penghapusan berhasil
+                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                            alert.setTitle("Sukses");
+                            alert.setHeaderText(null);
+                            alert.setContentText("Data berhasil dihapus!");
+                            alert.showAndWait();
+
+                            // Refresh tabel setelah penghapusan
+                            refreshTable();
+                        }
+                    }
+                }
+
+            } else {
+                // Menampilkan Alert jika tidak ada data yang dipilih
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Peringatan");
+                alert.setHeaderText(null);
+                alert.setContentText("Pilih data yang ingin dihapus!");
+                alert.showAndWait();
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     @FXML
     void input(ActionEvent event) {
         // Memeriksa apakah data yang dimasukkan sudah ada dalam tabel (berdasarkan NIS)
@@ -166,14 +159,13 @@ public class Admin {
                 }
 
                 // Perbarui tabel setelah penyisipan atau pembaruan
-                // Panggil suatu method untuk memperbarui data tabel
                 refreshTable();
 
                 // Menampilkan Alert jika penyisipan atau pembaruan berhasil
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Sukses");
                 alert.setHeaderText(null);
-                alert.setContentText(isUpdate ? "Data berhasil diperbarui!" : "Data berhasil disisipkan!");
+                alert.setContentText(isUpdate ? "Data berhasil diperbarui!" : "Data berhasil diinput!");
                 alert.showAndWait();
 
                 // Mengaktifkan kembali pengeditan kolom NIS setelah operasi selesai
@@ -194,13 +186,12 @@ public class Admin {
     }
 
 
-
     // Method untuk memeriksa apakah data sudah ada dalam tabel berdasarkan NIS
     private boolean isDataExists(String nis) {
         try (Connection connection = DatabaseConnection.getConnection();
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM siswa WHERE NIS=?")) {statement.setString(1, nis);
             try (ResultSet resultSet = statement.executeQuery()) {
-                return resultSet.next(); //Mengembalikan true jika data sudah ada, false jika belum
+                return resultSet.next(); //Mengembalikan true jika data sudah ada
             }
 
         } catch (SQLException e) {
@@ -212,19 +203,17 @@ public class Admin {
 
     @FXML
     void refresh(ActionEvent event) {
-        // Memanggil metode refreshTable untuk meng-update tabel
         refreshTable();
     }
 
 
-
-    // Metode untuk memeriksa apakah ada data yang kosong
+    // Method untuk memeriksa apakah ada data yang kosong
     private boolean isDataValid() {
         return !field_NIS.getText().isEmpty() && !field_Nama.getText().isEmpty() && !field_Indonesia.getText().isEmpty() && !field_Inggris.getText().isEmpty() && !field_IPA.getText().isEmpty() && !field_MTK.getText().isEmpty();
     }
 
 
-    // Metode untuk meng-update tabel
+    // Method untuk load tabel
     private void loadDataFromDatabase() {
         try (Connection connection = DatabaseConnection.getConnection();
             Statement statement = connection.createStatement();
@@ -265,26 +254,37 @@ public class Admin {
         loadDataFromDatabase();
     }
 
+
     @FXML
     void logout(ActionEvent event) {
-        try {
-            // Kode untuk kembali ke menu login
-            FXMLLoader fxmlLoader = new FXMLLoader(RekapNilaiApp.class.getResource("login.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 800, 500);
+        // Menampilkan konfirmasi dialog sebelum logout
+        Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmAlert.setTitle("Konfirmasi");
+        confirmAlert.setHeaderText(null);
+        confirmAlert.setContentText("Apakah anda yakin ingin logout?");
+        Optional<ButtonType> result = confirmAlert.showAndWait();
 
-            // Menampilkan scene
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(scene);
-            stage.show();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            try {
+                // Kode untuk kembali ke menu login
+                FXMLLoader fxmlLoader = new FXMLLoader(RekapNilaiApp.class.getResource("login.fxml"));
+                Scene scene = new Scene(fxmlLoader.load(), 800, 500);
 
-        } catch (IOException e) {
-            e.printStackTrace();
+                // Menampilkan scene
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(scene);
+                stage.show();
+
+                // Menampilkan informasi apabila berhasil logout
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Sukses !!!");
+                alert.setHeaderText(null);
+                alert.setContentText("Anda telah logout");
+                alert.showAndWait();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-        // Menampilkan informasi apabila berhasil logout
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Sukses !!!");
-        alert.setHeaderText(null);
-        alert.setContentText("Anda telah logout");
-        alert.showAndWait();
     }
 }

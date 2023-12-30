@@ -9,6 +9,7 @@ public class DatabaseConnection {
         String url = "jdbc:mysql://localhost:3306/rekapnilai";
         String user = "root";
         String password = "";
+
         return DriverManager.getConnection(url, user, password);
     }
 }

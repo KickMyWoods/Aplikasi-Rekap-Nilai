@@ -6,8 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="0d38e5c4-0808-4b27-bf0c-15650057fdad" name="Changes" comment="Cleaning">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/rekap/demo/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/rekap/demo/Login.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/src/main/resources/com/rekap/demo/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/resources/com/rekap/demo/login.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/rekap/demo/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/rekap/demo/Admin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/rekap/demo/DatabaseConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/rekap/demo/DatabaseConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/resources/com/rekap/demo/admin.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/resources/com/rekap/demo/admin.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -119,7 +120,7 @@
       <workItem from="1703855834845" duration="277000" />
       <workItem from="1703856200533" duration="99000" />
       <workItem from="1703856437917" duration="63000" />
-      <workItem from="1703913423769" duration="1418000" />
+      <workItem from="1703913423769" duration="3400000" />
     </task>
     <task id="LOCAL-00001" summary="Test GUI">
       <created>1703139731608</created>
